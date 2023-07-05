@@ -30,7 +30,7 @@ NoU_Motor rightIntakeMotor(6);
 
 // Servos
 NoU_Servo armServo(1);
-NoU_Servo wristServo(2);
+NoU_Servo wristServo(4);
 
 // Drivetrain
 NoU_Drivetrain drivetrain(&frontLeftMotor, &frontRightMotor, &rearLeftMotor, &rearRightMotor);
@@ -41,16 +41,18 @@ NoU_Drivetrain drivetrain(&frontLeftMotor, &frontRightMotor, &rearLeftMotor, &re
 const double INTAKE_POWER = 1.0;
 
 // Arm Servo constants
-const int ARM_FLOOR_POS = 15;
-const int ARM_HP_POS = 45;
-const int ARM_SCORE_POS = 169;
+const int ARM_FLOOR_POS = 175;
+const int ARM_HP_POS = 135;
+const int ARM_SCORE_POS = 0;
+const int ARM_START_POS = 0;
 
 // Wrist Servo constants
-const int WRIST_FLOOR_POS = 15;
-const int WRIST_HP_POS = 45;
+const int WRIST_FLOOR_POS = 80;
+const int WRIST_HP_POS = 180;
 const int WRIST_TOP_POS = 150;
-const int WRIST_MID_POS = 169;
-const int WRIST_BOT_POS = 180;
+const int WRIST_MID_POS = 50;
+const int WRIST_BOT_POS = 50;
+const int WRIST_START_POS = 60;
 
 /* Joystick constants */
 
@@ -76,5 +78,9 @@ const int STATION_AUTO_BUTTON = 9;
 
 //Scoring Boolean
 bool scoring;
+
+//Servo Positions
+int armServoAngle = ARM_START_POS;
+int wristServoAngle = WRIST_START_POS;
 
 #endif

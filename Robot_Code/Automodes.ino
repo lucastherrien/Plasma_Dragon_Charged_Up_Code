@@ -14,7 +14,7 @@
 void curvatureDriveTimed(float throttle, float rotation, int ms) {
     drivetrain.curvatureDrive(throttle, rotation);
     delay(ms);
-    drivetrain.curvatureDrive(0,0);
+    //drivetrain.curvatureDrive(0,0);
 }
 
 void autoIntake(){
@@ -44,11 +44,17 @@ void driveForwardAuto(){
 // Automodes
 
 void oneCubeAuto(){
-    curvatureDriveTimed(-1.0,0,500);
+    curvatureDriveTimed(0.75,0,0.200);
+    armServo.write(ARM_SCORE_POS);
+    wristServo.write(WRIST_MID_POS);
     autoOuttake();
     armServo.write(ARM_FLOOR_POS);
     wristServo.write(WRIST_FLOOR_POS);
-    curvatureDriveTimed(1.0,0,2500);
+    armServoAngle = ARM_FLOOR_POS;
+    wristServoAngle = WRIST_FLOOR_POS;
+    curvatureDriveTimed(0,0,1000);
+    curvatureDriveTimed(-0.85,0,2000);
+    //drivetrain.curvatureDrive(0,0);
 }
 
 void twoCubeAuto(){

@@ -19,13 +19,23 @@ void setup() {
     rearLeftMotor.setInverted(false);
     rearRightMotor.setInverted(true);
 
+    frontLeftMotor.setMaximumOutput(0.85);
+    frontRightMotor.setMaximumOutput(0.85);
+    rearLeftMotor.setMaximumOutput(0.85);
+    rearRightMotor.setMaximumOutput(0.85);
+
     leftIntakeMotor.setInverted(false);
     rightIntakeMotor.setInverted(false);
 
+    drivetrain.setMinimumOutput(0.3);
+    drivetrain.setInputDeadband(0.1);
+    drivetrain.setInputExponent(1.5);
+    //drivetrain.setMaximumOutput(0.85);
+
     scoring = true;
 
-    armServo.write(ARM_SCORE_POS);
-    wristServo.write(WRIST_TOP_POS);
+    armServo.write(ARM_START_POS);
+    wristServo.write(WRIST_START_POS);
 
     RSL::initialize();
     RSL::setState(RSL_ENABLED);
@@ -35,8 +45,6 @@ void loop() {
 // Here we define the variables we use in the loop
     int throttle = 0;
     int rotation = 0;
-    int armServoAngle = 0;
-    int wristServoAngle = 0;
 
 // Here we decide what the throttle and rotation direction will be based on gamepad inputs   
     if (AlfredoConnect.getGamepadCount() >= 1) {
@@ -47,9 +55,8 @@ void loop() {
         } else if (AlfredoConnect.buttonHeld(ATK3,STATION_AUTO_BUTTON)) {
             chargeStationAuto();
         } else {
-            float throttle = -AlfredoConnect.getAxis(ATK3, THROTTLE_AXIS);
-            float rotation = AlfredoConnect.getAxis(ATK3, ROT_AXIS);
-            
+            float throttle = AlfredoConnect.getAxis(ATK3, THROTTLE_AXIS);
+            float rotation = -AlfredoConnect.getAxis(ATK3, ROT_AXIS);
             drivetrain.curvatureDrive(throttle, rotation);
         }
         RSL::setState(RSL_ENABLED);
@@ -73,7 +80,7 @@ Cone Scoring Positions?
         armServoAngle = ARM_FLOOR_POS;
         wristServoAngle = WRIST_FLOOR_POS;
     } else if(AlfredoConnect.buttonHeld(ATK3,HP_BUTTON)) {
-        scoring = false;
+        scoring = true;
         armServoAngle = ARM_HP_POS;
         wristServoAngle = WRIST_HP_POS;
     } else if(AlfredoConnect.buttonHeld(ATK3,TOP_BUTTON)) {
