@@ -1,5 +1,8 @@
 # Team 14 Plasma Dragon's code for MiniFRC Charged Up
 
+MiniFRC Charged Up info:
+https://terrorbytes.org/minifrc-2/minifrc-9-charged-up/ 
+
 CAD for Jawbreaker:
 ![jawbreaker_cad](https://github.com/lucastherrien/Plasma_Dragon_Charged_Up_Code/blob/main/readme_images/jawbreaker_cad.png)
 
