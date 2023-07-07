@@ -11,6 +11,7 @@ https://cad.onshape.com/documents/4ae45de922c612c4e9e51e95/w/c26b4b27ffa000ab74f
 
 Robot Code:
 https://github.com/lucastherrien/Plasma_Dragon_Charged_Up_Code/tree/main/Robot_Code
+![robot_gif](https://github.com/lucastherrien/Plasma_Dragon_Charged_Up_Code/blob/main/readme_images/robot_with_cube.gif)
 
 Pico4ML cube detector project:
 https://github.com/lucastherrien/Plasma_Dragon_Charged_Up_Code/tree/main/Machine_Learning
