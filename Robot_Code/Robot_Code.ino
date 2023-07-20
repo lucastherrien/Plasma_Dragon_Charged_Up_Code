@@ -85,7 +85,7 @@ Cone Scoring Positions?
         wristServoAngle = WRIST_HP_POS;
     } else if(AlfredoConnect.buttonHeld(ATK3,TOP_BUTTON)) {
         scoring = true;
-        armServoAngle = ARM_SCORE_POS;
+        armServoAngle = ARM_TOP_POS;
         wristServoAngle = WRIST_TOP_POS;
     } else if(AlfredoConnect.buttonHeld(ATK3,MID_BUTTON)) {
         scoring = true;

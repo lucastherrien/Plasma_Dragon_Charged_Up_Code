@@ -43,6 +43,7 @@ const double INTAKE_POWER = 1.0;
 // Arm Servo constants
 const int ARM_FLOOR_POS = 172;
 const int ARM_HP_POS = 135;
+const int ARM_TOP_POS = 80;
 const int ARM_SCORE_POS = 0;
 const int ARM_START_POS = 0;
 
