@@ -8,6 +8,8 @@
 
 #include "Automodes.h"
 #include "Robot_Code.h"
+#include <Pixy2UART.h>
+Pixy2UART pixy;
 
 // Automode auxiliary functions
 
@@ -28,7 +30,7 @@ void autoIntake(){
 void autoOuttake(){
     leftIntakeMotor.set(INTAKE_POWER);
     rightIntakeMotor.set(INTAKE_POWER);
-    delay(500);
+    delay(750);
     leftIntakeMotor.set(0);
     rightIntakeMotor.set(0);
 }
@@ -37,16 +39,19 @@ void lookForCube(){
     //TODO, Dependant on actually training a good model for the pico
 }
 
+// Automodes
+
 void driveForwardAuto(){
     curvatureDriveTimed(1.0,0,2000);
 }
 
-// Automodes
-
 void oneCubeAuto(){
-    curvatureDriveTimed(0.75,0,0.200);
+    armServo.write(ARM_BOT_POS);
+    curvatureDriveTimed(0,0,500);
+    curvatureDriveTimed(0.75,0,200);
     armServo.write(ARM_SCORE_POS);
     wristServo.write(WRIST_MID_POS);
+    curvatureDriveTimed(0,0,500);
     autoOuttake();
     armServo.write(ARM_FLOOR_POS);
     wristServo.write(WRIST_FLOOR_POS);
@@ -66,13 +71,13 @@ void twoCubeAuto(){
     curvatureDriveTimed(0.5, 0.2, 250);
     //lookForCube();
     autoIntake();
-    armServo.write(ARM_HP_POS);
-    wristServo.write(WRIST_HP_POS);
-    curvatureDriveTimed(-0.5, -0.2, 250);
-    curvatureDriveTimed(-1.0,0,3000);
     armServo.write(ARM_SCORE_POS);
     wristServo.write(WRIST_MID_POS);
+    curvatureDriveTimed(-0.5, -0.2, 250);
+    curvatureDriveTimed(-1.0,0,3000);
     autoOuttake();
+    armServo.write(ARM_FLOOR_POS);
+    wristServo.write(WRIST_FLOOR_POS);
 }
 
 void chargeStationAuto(){

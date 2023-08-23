@@ -19,10 +19,10 @@ void setup() {
     rearLeftMotor.setInverted(false);
     rearRightMotor.setInverted(true);
 
-    frontLeftMotor.setMaximumOutput(0.85);
-    frontRightMotor.setMaximumOutput(0.85);
-    rearLeftMotor.setMaximumOutput(0.85);
-    rearRightMotor.setMaximumOutput(0.85);
+    frontLeftMotor.setMaximumOutput(DRIVETRIAN_MAX_POWER);
+    frontRightMotor.setMaximumOutput(DRIVETRIAN_MAX_POWER);
+    rearLeftMotor.setMaximumOutput(DRIVETRIAN_MAX_POWER);
+    rearRightMotor.setMaximumOutput(DRIVETRIAN_MAX_POWER);
 
     leftIntakeMotor.setInverted(false);
     rightIntakeMotor.setInverted(false);
@@ -57,6 +57,7 @@ void loop() {
         } else {
             float throttle = AlfredoConnect.getAxis(ATK3, THROTTLE_AXIS);
             float rotation = -AlfredoConnect.getAxis(ATK3, ROT_AXIS);
+            rotation = constrain(rotation,-MAX_TURN_POWER,MAX_TURN_POWER);
             drivetrain.curvatureDrive(throttle, rotation);
         }
         RSL::setState(RSL_ENABLED);
@@ -79,10 +80,10 @@ Cone Scoring Positions?
         scoring = false;
         armServoAngle = ARM_FLOOR_POS;
         wristServoAngle = WRIST_FLOOR_POS;
-    } else if(AlfredoConnect.buttonHeld(ATK3,HP_BUTTON)) {
+    } else if(AlfredoConnect.buttonHeld(ATK3,BOT_BUTTON)) {
         scoring = true;
-        armServoAngle = ARM_HP_POS;
-        wristServoAngle = WRIST_HP_POS;
+        armServoAngle = ARM_BOT_POS;
+        wristServoAngle = WRIST_BOT_POS;
     } else if(AlfredoConnect.buttonHeld(ATK3,TOP_BUTTON)) {
         scoring = true;
         armServoAngle = ARM_TOP_POS;
@@ -91,10 +92,14 @@ Cone Scoring Positions?
         scoring = true;
         armServoAngle = ARM_SCORE_POS;
         wristServoAngle = WRIST_MID_POS;
-    } else if(AlfredoConnect.buttonHeld(ATK3,BOT_BUTTON)) {
+    } else if(AlfredoConnect.buttonHeld(ATK3,CONE_PICKUP_BUTTON)) {
+        scoring = false;
+        armServoAngle = ARM_FLOOR_POS-20;
+        wristServoAngle = 160;//WRIST_BOT_POS;
+    } else if(AlfredoConnect.buttonHeld(ATK3,MID_CONE_BUTTON)) {
         scoring = true;
-        armServoAngle = ARM_SCORE_POS;
-        wristServoAngle = WRIST_BOT_POS;
+        armServoAngle = ARM_MID_CONE_POS;
+        wristServoAngle = WRIST_MID_CONE_POS;
     }
 
 // Intake control

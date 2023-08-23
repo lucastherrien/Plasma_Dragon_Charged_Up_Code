@@ -42,18 +42,19 @@ const double INTAKE_POWER = 1.0;
 
 // Arm Servo constants
 const int ARM_FLOOR_POS = 172;
-const int ARM_HP_POS = 135;
+const int ARM_BOT_POS = 135;
 const int ARM_TOP_POS = 80;
 const int ARM_SCORE_POS = 0;
-const int ARM_START_POS = 0;
+const int ARM_START_POS = 165;
+const int ARM_MID_CONE_POS = 80;
 
 // Wrist Servo constants
-const int WRIST_FLOOR_POS = 80;
-const int WRIST_HP_POS = 180;
+const int WRIST_FLOOR_POS = 70;
 const int WRIST_TOP_POS = 150;
 const int WRIST_MID_POS = 50;
-const int WRIST_BOT_POS = 50;
-const int WRIST_START_POS = 60;
+const int WRIST_BOT_POS = 180;
+const int WRIST_START_POS = 180;
+const int WRIST_MID_CONE_POS = 180;
 
 /* Joystick constants */
 
@@ -67,13 +68,15 @@ const int THROTTLE_AXIS = 1;
 // Joystick buttons
 const int INTAKE_BUTTON = 0;
 const int FLOOR_BUTTON = 1;
-const int HP_BUTTON = 2;
-const int TOP_BUTTON = 3;
+const int TOP_BUTTON = 2;
+const int BOT_BUTTON = 3;
 const int MID_BUTTON = 4;
-const int BOT_BUTTON = 6;
+const int MID_CONE_BUTTON = 5;
+const int CONE_PICKUP_BUTTON = 6;
 const int CUBE_AUTO_BUTTON = 7;
 const int FORWARD_AUTO_BUTTON = 8;
 const int STATION_AUTO_BUTTON = 9;
+
 
 /* Misc */
 
@@ -83,5 +86,9 @@ bool scoring;
 //Servo Positions
 int armServoAngle = ARM_START_POS;
 int wristServoAngle = WRIST_START_POS;
+
+//Drivetrain power limiters
+const float DRIVETRIAN_MAX_POWER = 1.0;
+const float MAX_TURN_POWER = 0.85;
 
 #endif
