@@ -38,18 +38,18 @@ NoU_Drivetrain drivetrain(&frontLeftMotor, &frontRightMotor, &rearLeftMotor, &re
 /* Robot Control Constants */
 
 // Intake constants
-const double INTAKE_POWER = 1.0;
+const double INTAKE_POWER = -1.0;
 
 // Arm Servo constants
-const int ARM_FLOOR_POS = 172;
+const int ARM_FLOOR_POS = 170;
 const int ARM_BOT_POS = 135;
 const int ARM_TOP_POS = 80;
 const int ARM_SCORE_POS = 0;
-const int ARM_START_POS = 165;
+const int ARM_START_POS = 155;
 const int ARM_MID_CONE_POS = 80;
 
 // Wrist Servo constants
-const int WRIST_FLOOR_POS = 70;
+const int WRIST_FLOOR_POS = 65;
 const int WRIST_TOP_POS = 150;
 const int WRIST_MID_POS = 50;
 const int WRIST_BOT_POS = 180;
@@ -77,7 +77,6 @@ const int CUBE_AUTO_BUTTON = 7;
 const int FORWARD_AUTO_BUTTON = 8;
 const int STATION_AUTO_BUTTON = 9;
 
-
 /* Misc */
 
 //Scoring Boolean
@@ -90,5 +89,6 @@ int wristServoAngle = WRIST_START_POS;
 //Drivetrain power limiters
 const float DRIVETRIAN_MAX_POWER = 1.0;
 const float MAX_TURN_POWER = 0.85;
+float STRAFE_ROT_ADJ = 0.3;
 
 #endif

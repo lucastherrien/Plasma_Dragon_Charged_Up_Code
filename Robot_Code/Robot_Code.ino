@@ -43,8 +43,9 @@ void setup() {
 
 void loop() {
 // Here we define the variables we use in the loop
-    int throttle = 0;
-    int rotation = 0;
+    float throttle = 0;
+    float strafe = 0;
+    float rotation = 0;
 
 // Here we decide what the throttle and rotation direction will be based on gamepad inputs   
     if (AlfredoConnect.getGamepadCount() >= 1) {
@@ -55,10 +56,18 @@ void loop() {
         } else if (AlfredoConnect.buttonHeld(ATK3,STATION_AUTO_BUTTON)) {
             chargeStationAuto();
         } else {
-            float throttle = AlfredoConnect.getAxis(ATK3, THROTTLE_AXIS);
-            float rotation = -AlfredoConnect.getAxis(ATK3, ROT_AXIS);
+            throttle = AlfredoConnect.getAxis(ATK3, THROTTLE_AXIS);
+            if (AlfredoConnect.keyHeld(Key::A)) {
+                strafe = 1.0;
+                rotation = -AlfredoConnect.getAxis(ATK3, ROT_AXIS)-STRAFE_ROT_ADJ;
+            } else if (AlfredoConnect.keyHeld(Key::D)) {
+                strafe = -1.0;
+                rotation = -AlfredoConnect.getAxis(ATK3, ROT_AXIS)+STRAFE_ROT_ADJ;
+            } else {
+              rotation = -AlfredoConnect.getAxis(ATK3, ROT_AXIS);
+            }
             rotation = constrain(rotation,-MAX_TURN_POWER,MAX_TURN_POWER);
-            drivetrain.curvatureDrive(throttle, rotation);
+            drivetrain.holonomicDrive(strafe, throttle, rotation);
         }
         RSL::setState(RSL_ENABLED);
     } else {
@@ -73,33 +82,39 @@ Intake human player station
 Score Cube Top Row
 Score Cube Middle Row
 Score Cube Bottom Row
-Cone Scoring Positions?
+Mid Cone
 */
 
     if(AlfredoConnect.buttonHeld(ATK3,FLOOR_BUTTON)){
         scoring = false;
         armServoAngle = ARM_FLOOR_POS;
         wristServoAngle = WRIST_FLOOR_POS;
+        STRAFE_ROT_ADJ = 0.3;
     } else if(AlfredoConnect.buttonHeld(ATK3,BOT_BUTTON)) {
         scoring = true;
         armServoAngle = ARM_BOT_POS;
         wristServoAngle = WRIST_BOT_POS;
+        STRAFE_ROT_ADJ = 0.3;
     } else if(AlfredoConnect.buttonHeld(ATK3,TOP_BUTTON)) {
         scoring = true;
         armServoAngle = ARM_TOP_POS;
         wristServoAngle = WRIST_TOP_POS;
+        STRAFE_ROT_ADJ = 0.3;
     } else if(AlfredoConnect.buttonHeld(ATK3,MID_BUTTON)) {
         scoring = true;
         armServoAngle = ARM_SCORE_POS;
         wristServoAngle = WRIST_MID_POS;
+        STRAFE_ROT_ADJ = -0.15;
     } else if(AlfredoConnect.buttonHeld(ATK3,CONE_PICKUP_BUTTON)) {
         scoring = false;
         armServoAngle = ARM_FLOOR_POS-20;
         wristServoAngle = 160;//WRIST_BOT_POS;
+        STRAFE_ROT_ADJ = 0.3;
     } else if(AlfredoConnect.buttonHeld(ATK3,MID_CONE_BUTTON)) {
         scoring = true;
         armServoAngle = ARM_MID_CONE_POS;
         wristServoAngle = WRIST_MID_CONE_POS;
+        STRAFE_ROT_ADJ = 0.3;
     }
 
 // Intake control
